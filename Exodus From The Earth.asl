@@ -12,7 +12,7 @@
 
 state("efte")
 {
-	bool 	inGame		: 0x96FDA8, 0x38, 0x4C;
+    	bool 	inGame		: 0x96FDA8, 0x38, 0x4C;
 	bool	inGamePause	: 0x95E521;
 	bool	Cutscene	: 0x9A8D04;
 	int	Chapter		: 0x992948, 0x4AC;
@@ -45,7 +45,7 @@ startup
 	vars.chap14 = 0;
 	
 	vars.ChapID = new List<int>()
-	{278,73,147,104,348,57,264,350,4,193,270,524,470,341,626,145,867,1140,638,585,266,21,248,531,109,130,177,123};
+	{278,73,147,104,348,57,264,350,4,193,270,524,470,341,626,145,867,1140,650,585,266,21,248,531,109,130,177,123};
 	
 	settings.Add("Chap", false, "Chapters");
 	vars.Levels = new Dictionary<string,string>
@@ -70,7 +70,7 @@ startup
 		{"145","Race With Troubles"}, 
 		{"867","The Dam"}, 
 		{"1140","Way to Cosmoport"}, 
-		{"638","The Last Jerk"}, 
+		{"650","The Last Jerk"}, 
 		{"585","To the Stars"}, 
 		{"266","Soft Landing"}, 
 		{"21","Plantation A.X"}, 
@@ -118,6 +118,7 @@ split
 	vars.ChapStr = current.Chapter.ToString();
 	
 	if(!current.inGamePause && vars.ChapID.Contains(current.Chapter) && !vars.completedSplits.Contains(current.Chapter) && settings["" + current.Chapter]){
+			vars.ChapID.Remove(current.Chapter);
 			vars.completedSplits.Add(current.Chapter);
 			return true;
 		}
@@ -146,4 +147,9 @@ exit
 {
     //pauses timer if the game crashes
 	timer.IsGameTimePaused = true;
+}
+
+reset
+{
+	
 }
