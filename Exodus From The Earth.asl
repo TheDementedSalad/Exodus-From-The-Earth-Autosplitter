@@ -12,13 +12,13 @@
 
 state("efte")
 {
-    bool 		inGame			: 0x96FDA8, 0x38, 0x4C;
-	bool		inGamePause		: 0x95E521;
-	bool		Cutscene		: 0x9A8D04;
-	int			Chapter			: 0x992948, 0x4AC;
-	float 		X				: 0x978CE0, 0x0, 0x228;
-	float 		Y				: 0x978CE0, 0x0, 0x238;
-	float 		Z				: 0x978CE0, 0x0, 0x248;
+	bool 	inGame		: 0x96FDA8, 0x38, 0x4C;
+	bool	inGamePause	: 0x95E521;
+	bool	Cutscene	: 0x9A8D04;
+	int	Chapter		: 0x992948, 0x4AC;
+	float 	X		: 0x978CE0, 0x0, 0x228;
+	float 	Y		: 0x978CE0, 0x0, 0x238;
+	float 	Z		: 0x978CE0, 0x0, 0x248;
 }
 
 startup
@@ -117,11 +117,10 @@ split
 {
 	vars.ChapStr = current.Chapter.ToString();
 	
-	if(current.inGame && vars.ChapID.Contains(current.Chapter) && !vars.completedSplits.Contains(current.Chapter) && settings["" + current.Chapter]){
+	if(!current.inGamePause && vars.ChapID.Contains(current.Chapter) && !vars.completedSplits.Contains(current.Chapter) && settings["" + current.Chapter]){
 			vars.completedSplits.Add(current.Chapter);
 			return true;
 		}
-	
 	
 	if(vars.chap14 == 0){
 		if(settings["14Start"] && current.inGamePause && current.X > 6 && current.X < 9 && current.Y > -4 && current.Y < 0 && current.Z > 17 && current.Z < 21){
