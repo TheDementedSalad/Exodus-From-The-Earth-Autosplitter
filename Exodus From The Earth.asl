@@ -12,13 +12,13 @@
 
 state("efte")
 {
-    	bool 	inGame		: 0x96FDA8, 0x38, 0x4C;
-	bool	inGamePause	: 0x95E521;
-	bool	Cutscene	: 0x9A8D04;
-	int	Chapter		: 0x992948, 0x4AC;
-	float 	X		: 0x978CE0, 0x0, 0x228;
-	float 	Y		: 0x978CE0, 0x0, 0x238;
-	float 	Z		: 0x978CE0, 0x0, 0x248;
+    bool 		inGame			: 0x96FDA8, 0x38, 0x4C;
+	bool		inGamePause		: 0x95E521;
+	bool		Cutscene		: 0x9A8D04;
+	int			Chapter			: 0x992948, 0x4AC;
+	float 		X				: 0x978CE0, 0x0, 0x228;
+	float 		Y				: 0x978CE0, 0x0, 0x238;
+	float 		Z				: 0x978CE0, 0x0, 0x248;
 }
 
 startup
@@ -43,9 +43,6 @@ startup
 	vars.completedSplits = new List<int>();
 	vars.end = 0;
 	vars.chap14 = 0;
-	
-	vars.ChapID = new List<int>()
-	{278,73,147,104,348,57,264,350,4,193,270,524,470,341,626,145,867,1140,650,585,266,21,248,531,109,130,177,123};
 	
 	settings.Add("Chap", false, "Chapters");
 	vars.Levels = new Dictionary<string,string>
@@ -98,7 +95,16 @@ update
 		vars.completedSplits.Clear();
 		vars.end = 0;
 		vars.chap14 = 0;
+		
+	vars.ChapID = new List<int>()
+	{278,73,147,104,348,57,264,350,4,193,270,524,470,341,626,145,867,1140,650,585,266,21,248,531,109,130,177,123};
 	}
+}
+
+init
+{
+	vars.ChapID = new List<int>()
+	{278,73,147,104,348,57,264,350,4,193,270,524,470,341,626,145,867,1140,650,585,266,21,248,531,109,130,177,123};
 }
 
 start
