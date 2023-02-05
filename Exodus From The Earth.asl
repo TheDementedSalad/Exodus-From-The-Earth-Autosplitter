@@ -47,36 +47,36 @@ startup
 	settings.Add("Chap", false, "Chapters");
 	vars.Levels = new Dictionary<string,string>
 	{
-		{"278","Welcome to A.X"}, 
+		{"278","Welcome to the A.X"}, 
 		{"73","Alarm"}, 
-		{"147","Alternative Route"}, 
-		{"407","Melt Department"}, 
-		{"104","Warehouse"}, 
-		{"348","Hot Place"}, 
-		{"57","Admin Offices"}, 
+		{"147","The Alternative Route"}, 
+		{"407","The Melting Workshop"}, 
+		{"104","The Warehouse"}, 
+		{"348","A Hot Place"}, 
+		{"57","The Administrative Complex, Office Facilities"}, 
 		{"264","Frank Was Here"}, 
-		{"350","Warehouse II"}, 
+		{"350","Warehouse II: Logistics A-La Frank"}, 
 		{"4","Container Jungles"}, 
-		{"193","A Dream"}, 
-		{"270","Subway"}, 
-		{"14Start","Project ZERO"}, 
+		{"193","A Dream?"}, 
+		{"270","The Transport Tunnel"}, 
+		{"14Start","Project ZERO: Testing Area"}, 
 		{"524","Early Loss - START HERE IF DOING CH13 SKIP"}, 
-		{"470","On the Old traces"}, 
+		{"470","Following the Old Tracks"}, 
 		{"341","Escape"}, 
 		{"626","Breakthrough"}, 
 		{"145","Race With Troubles"}, 
 		{"867","The Dam"}, 
-		{"1140","Way to Cosmoport"}, 
-		{"650","The Last Jerk"}, 
+		{"1140","The Way to the Cosmoport"}, 
+		{"650","The Finishing Spurt"}, 
 		{"585","To the Stars"}, 
 		{"266","Soft Landing"}, 
-		{"21","Plantation A.X"}, 
-		{"248","Extractive Complex"}, 
-		{"531","Galvanizing Plant"}, 
+		{"21","The A.X Plantation"}, 
+		{"248","The A.X Extraction Complex"}, 
+		{"531","The Hardening Plant"}, 
 		{"109","The Moment of Truth"}, 
-		{"130","Explosive Behaviour"}, 
-		{"177","Caution! It's Loaded"},
-		{"123","It's Time We Left"},
+		{"130","Explosive Temper"}, 
+		{"177","Caution! Loaded!"},
+		{"123","Time To Get Out"},
 	};
 		
 	foreach (var Tag in vars.Levels){
@@ -85,7 +85,13 @@ startup
 
 	settings.CurrentDefaultParent = null;
 	
-	settings.Add("End", true, "Final Split - Always Active");
+	settings.Add("End", true, "He Who Laughs Last - Always Active");
+}
+
+init
+{
+	vars.ChapID = new List<int>()
+	{278,73,147,104,348,57,264,350,4,193,270,524,470,341,626,145,867,1140,650,585,266,21,248,531,109,130,177,123};
 }
 
 update
@@ -101,16 +107,10 @@ update
 	}
 }
 
-init
-{
-	vars.ChapID = new List<int>()
-	{278,73,147,104,348,57,264,350,4,193,270,524,470,341,626,145,867,1140,650,585,266,21,248,531,109,130,177,123};
-}
-
 start
 {
 	// Timer starts if the "Game Saved" text is visible while the player is at the starting XYZ coordinates
-	return !current.inGamePause && current.Chapter == 144;
+	return !current.inGamePause && old.inGamePause && current.Chapter == 144;
 }
 
 onStart
@@ -157,5 +157,5 @@ exit
 
 reset
 {
-	
+	return current.inGame && !old.inGame && current.X > 6 && current.X < 9 && current.Y > 3 && current.Y < 5 && current.Z > -62 && current.Z < -57;
 }
